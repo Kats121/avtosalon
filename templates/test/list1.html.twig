@@ -1,0 +1,30 @@
+<html>
+<body>
+<h2>Заказы и сумма</h2>
+<form method="post" action="{{ path('list1') }}">
+<input type="submit" value="отправить">
+<table>
+    <thead>
+        <tr>
+            <th>Имя человека</th>
+            <th>Цена машины</th>
+            <th>Название машины</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ people.name }}</td>
+                <td>{{ people.price }}</td>
+                <td>{{ people.car }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Нет данных.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>Средняя цена заказов: {{ averagePrice|number_format(2, '.', ',') }} </p>
+</body>
+</html>

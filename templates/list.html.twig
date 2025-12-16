@@ -1,0 +1,31 @@
+<html>
+<body>
+<h2>Список клиентов и число их покупок</h2>
+<form method="post" action="{{ path('list') }}">
+<input type="submit" value="отправить">
+<table>
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Почта</th>
+            <th>Количество заказов</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for people in peoples %}
+            <tr>
+                <td>{{ people.name }}</td>
+                <td>{{ people.email }}</td>
+                <td>{{ people.Quantity }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">Нет данных.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
+
+
