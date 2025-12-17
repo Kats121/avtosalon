@@ -1,16 +1,16 @@
 <table>
     <thead>
       <tr>
-        <th>число</th>
-        <th>name</th>
+        <th>summ</th>
       </tr>
     </thead>
     <tbody>
       {% for order in orders %}
       <tr>
-          <td>{{orders.purchase_count}}</td>
-          <td>{{orders.name}}</td>
+          <td>{{order.average_purchase_amount}}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>>
+
+

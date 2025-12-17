@@ -1,14 +1,14 @@
 <table>
     <thead>
       <tr>
-        <th>число</th>
+        <th>summa</th>
         <th>name</th>
       </tr>
     </thead>
     <tbody>
       {% for order in orders %}
       <tr>
-          <td>{{orders.purchase_count}}</td>
+          <td>{{orders.total_spent}}</td>
           <td>{{orders.name}}</td>
       </tr>
       {% endfor %}

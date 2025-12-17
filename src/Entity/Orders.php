@@ -2,29 +2,26 @@
 
 namespace App\Entity;
 
-use App\Repository\OrdersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrdersRepository::class)]
-class Orders
+#[ORM\Entity]
+#[ORM\Table(name: 'orders')]
+class Order
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+     private ?int $order_id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $avto = null;
+    #[ORM\Column(name: 'order_date', type: 'date')]
+    private ?\DateTimeInterface $orderDate = null;
 
-   #[ORM\Column]
-    private ?int $price = null;
+    #[ORM\Column(name: 'total_amount', type: 'decimal', precision: 10, scale: 2)]
+    private ?string $totalAmount = null;
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->order_id;
     }
 
     public function getName(): ?string
@@ -39,26 +36,25 @@ class Orders
         return $this;
     }
 
-    public function getAvto(): ?string
+    public function getOrderDate(): ?\DateTimeInterface
     {
-        return $this->avto;
+        return $this->orderDate;
     }
 
-    public function setAvto(string $avto): static
+    public function setOrderDate(\DateTimeInterface $orderDate): self
     {
-        $this->avto = $avto;
-
+        $this->orderDate = $orderDate;
         return $this;
     }
-     public function getPrice(): ?int
+
+    public function getTotalAmount(): ?string
     {
-        return $this->price;
+        return $this->totalAmount;
     }
 
-    public function setPrice(int $price): static
+    public function setTotalAmount(string $totalAmount): self
     {
-        $this->price = $price;
-
+        $this->totalAmount = $totalAmount;
         return $this;
     }
 }

@@ -2,31 +2,34 @@
 
 namespace App\Entity;
 
-use App\Repository\PeopleRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
-#[ORM\Entity(repositoryClass: PeopleRepository::class)]
-class People
+#[ORM\Entity]
+class Customer
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(name: 'id', type: 'integer')]
+    private ?int $customer_id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'customer_name', type: 'string', length: 255)]
     private ?string $name = null;
-
     #[ORM\Column(length: 255)]
     private ?string $email = null;
-    #[ORM\Column]
-    private ?int $quantity = null;
-    #[ORM\Column(type: Types::BLOB)]
-    private $img;
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'customer')]
+    private Collection $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->customer_id;
     }
 
     public function getName(): ?string
@@ -37,10 +40,8 @@ class People
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -48,19 +49,18 @@ class People
 
     public function setEmail(string $email): static
     {
-        $this->email = $email;
-
+         $this->email = $email;
         return $this;
     }
-       public function getQuantity(): ?int
+
+     public function getOrders(): Collection
     {
-        return $this->quantity;
+        return $this->orders;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setOrder(Order $order): static
     {
-        $this->quantity = $quantity;
-
+           $this->$order = $order;
         return $this;
     }
 }

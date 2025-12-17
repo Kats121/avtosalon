@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\CarRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CarRepository::class)]
+#[ORM\Entity]
+#[ORM\Table(name: 'cars')]
 class Car
 {
     #[ORM\Id]
@@ -18,7 +18,6 @@ class Car
 
     #[ORM\Column]
     private ?int $price = null;
-
     public function getId(): ?int
     {
         return $this->id;
