@@ -23,15 +23,15 @@ class AutoSalonController extends AbstractController
     public function fzadanie(): Response
     {
         $query = $this->entityManager->createQuery(
-            'SELECT c.name, COUNT(o.id) AS purchase_count              FROM App\Entity\Customer c              LEFT JOIN c.orders o              GROUP BY c.id              ORDER BY purchase_count DESC'
+            'SELECT c.name, COUNT(o.id) AS purchase_count FROM App\Entity\People c LEFT JOIN c.orders o GROUP BY c.id ORDER BY purchase_count DESC'
         );
         $result1 = $query->getResult();
 
-       
         return $this->render('list.html.twig', [
             'orders' => $result1,
         ]);
     }
+
     #[Route('/twozadanie', name: 'twozadanie')]
     public function twozadanie(): Response
     {
@@ -47,6 +47,7 @@ class AutoSalonController extends AbstractController
             'orders' => $result2,
         ]);
     }
+
     #[Route('/threezad', name: 'threezad')]
     public function threezad(): Response
     {
@@ -59,11 +60,11 @@ class AutoSalonController extends AbstractController
         )->setMaxResults(3);
         $result3 = $query->getResult();
 
-       
         return $this->render('top.html.twig', [
             'orders' => $result3,
         ]);
     }
+
     #[Route('/fourtask', name: 'fourtask')]
     public function fourtask(): Response
     {
@@ -78,7 +79,6 @@ class AutoSalonController extends AbstractController
         ]);
     }
 
-
     #[Route('/fivetask', name: 'fivetask')]
     public function fivetask(): Response
     {
@@ -89,7 +89,7 @@ class AutoSalonController extends AbstractController
         )->setMaxResults(1);
         $result5 = $query->getSingleResult();
 
-         return $this->render('gold.html.twig', [
+        return $this->render('gold.html.twig', [
             'orders' => $result5,
         ]);
     }
